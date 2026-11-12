@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Remove a PDF password</title>
+  <meta name="description" content="Remove a known PDF password in the browser. The file never leaves your device.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230c6b4d'/%3E%3Cpath d='M10 15V12a6 6 0 0 1 12 0v3' fill='none' stroke='%23f3fff8' stroke-width='2'/%3E%3Crect x='8' y='15' width='16' height='10' rx='2' fill='%23f3fff8'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <header>
+      <p class="mark">pdf-password-remover</p>
+      <h1>Remove a PDF password</h1>
+      <p class="lede">Choose a PDF you already know the password for, and download a copy that opens without asking.</p>
+    </header>
+
+    <form id="form">
+      <label class="drop" id="drop" for="file">
+        <input id="file" name="file" type="file" accept="application/pdf,.pdf">
+        <span class="drop-title" id="file-label">Choose a PDF</span>
+        <span class="drop-hint" id="file-hint">or drop it here</span>
+      </label>
+
+      <label class="field" for="password">
+        <span>Password</span>
+        <span class="password-row">
+          <input id="password" name="pdf-password" type="password" autocomplete="off" spellcheck="false" autocapitalize="off">
+          <button type="button" id="toggle-password" aria-controls="password" aria-pressed="false">Show</button>
+        </span>
+      </label>
+
+      <button type="submit" id="submit" disabled>Remove password</button>
+      <p id="status" role="status">Loading decryptor…</p>
+      <p id="error" role="alert" hidden></p>
+      <a id="download" hidden>Download unprotected PDF</a>
+    </form>
+
+    <footer>
+      <p>The PDF and password stay in this browser. Nothing is uploaded, and this page does not try passwords you did not type.</p>
+      <p>Decryption runs here with <a href="https://qpdf.sourceforge.io/">qpdf</a>. Leave the password blank only when the PDF already opens and you want permission restrictions removed.</p>
+    </footer>
+  </main>
+  <script src="vendor/qpdf.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
