@@ -1,36 +1,40 @@
 # pdf-password-remover
 
-Remove a known password from a PDF, either with the Java command-line tool or in the browser.
+This repository contains two applications. Each one removes a known password from a PDF and writes a copy that opens without one.
 
-The browser page does not guess passwords. It only opens a PDF with the password you type, then saves a copy with the password removed. The file stays on your device.
+| Application | Code | Engine | Where it runs |
+| --- | --- | --- | --- |
+| Command-line tool | `src/main/java` | Apache PDFBox | Your machine, via `java -jar` |
+| Browser page | `docs/` | qpdf, compiled to WebAssembly | The browser, hosted by GitHub Pages |
 
-##### In the browser #####
+Both applications use the password you supply. qpdf is loaded from `docs/vendor/` on this site and runs in the browser. The PDF and password stay on that device.
 
-The page lives in `docs/`. GitHub Pages can host it with no build step.
+## Browser page
 
-1. Merge this folder to the default branch.
-2. Open **Settings → Pages**.
-3. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
-4. Choose the default branch and the `/docs` folder, then save.
+Static files in `docs/`. GitHub Pages hosts them with no build.
 
-The site is published at `https://satzkumarn.github.io/pdf-password-remover/`. Pick a PDF, enter its password, and download `unprotected-<filename>`.
+1. Open **Settings → Pages**.
+2. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
+3. Choose the default branch and the `/docs` folder, then save.
 
-To try the page locally, serve `docs/` over HTTP (opening the file directly will not load WebAssembly):
+The site is `https://satzkumarn.github.io/pdf-password-remover/`. Choose a PDF, enter its password, and download `unprotected-<filename>`.
+
+To try it locally, serve `docs/` over HTTP. A `file://` URL cannot load the WebAssembly module.
 
 `python3 -m http.server 8000 --directory docs`
 
 Then open `http://127.0.0.1:8000`.
 
-##### To Build #####
+## Command-line tool
+
+Build with Maven:
 
 `mvn clean install`
 
-##### To Run #####
-
-After building, the jar is in the `target` folder.
+The jar is written to `target/`.
 
 `java -jar pdf-password-remover.jar <absolute_path> <filename> <password>`
 
-###### Example ######
+Example:
 
 `java -jar pdf-password-remover.jar D:\folder pwd-protected.pdf dummy-password`
