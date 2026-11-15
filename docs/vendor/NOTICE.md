@@ -1,4 +1,4 @@
-The files `qpdf.js` and `qpdf.wasm` are the 0.3.0 build of
+The files `qpdf.js` and `qpdf.wasm` are the 0.3.1 build of
 [@neslinesli93/qpdf-wasm](https://github.com/neslinesli93/qpdf-wasm)
 (ISC), which embeds [qpdf](https://github.com/qpdf/qpdf) 12.2.0.
 

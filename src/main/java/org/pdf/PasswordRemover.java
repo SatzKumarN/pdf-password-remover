@@ -1,10 +1,9 @@
 package org.pdf;
 
-import static org.apache.pdfbox.pdmodel.PDDocument.load;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 class PasswordRemover {
@@ -18,7 +17,7 @@ class PasswordRemover {
 	}
 
 	public byte[] remove() throws IOException {
-		try (PDDocument pdd = load(pwdProtectedFile, pwd)) {
+		try (PDDocument pdd = Loader.loadPDF(pwdProtectedFile, pwd)) {
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			pdd.setAllSecurityToBeRemoved(true);
 			pdd.save(bos);

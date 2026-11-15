@@ -27,7 +27,7 @@ Then open `http://127.0.0.1:8000`.
 
 ## Command-line tool
 
-Build with Maven:
+Requires Java 17 or newer. Build with Maven:
 
 `mvn clean install`
 
